@@ -10,6 +10,7 @@ class Congelateur(models.Model):
     def __str__(self):
         return self.code
 
+
 class Tiroir (models.Model):
     id = models.AutoField(primary_key=True)
     code = models.CharField(max_length=15, unique=True, verbose_name="Code")

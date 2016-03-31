@@ -1,7 +1,8 @@
 from django.shortcuts import render
-from congelateur.models import Glace, Congelateur
-
-from django.views.generic import ListView
+from congelateur.models import Glace, Congelateur, Tiroir
+from django.db.models import Sum
+from django.db import connection
+from django.views.generic import ListView, DetailView
 
 # Create your views here.
 
@@ -27,6 +28,12 @@ class CongelateurListView(ListView):
 
     def get_context_data(self, **kwargs):
         context = super(CongelateurListView, self).get_context_data(**kwargs)
+        return context
+
+class CongelateurDetailView(DetailView):
+    model = Congelateur
+    def get_context_data(self, **kwargs):
+        context = super(CongelateurDetailView, self).get_context_data(**kwargs)
         return context
 
 class GlaceListView(ListView):
