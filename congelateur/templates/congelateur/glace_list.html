@@ -1,4 +1,4 @@
-{% extends "base.html" %}
+{% extends "congelateur/base.html" %}
 {% load staticfiles %}
 {% block title %}Products{% endblock %}
 {% block stylesheets %}
@@ -16,12 +16,12 @@
                     <th>Calories</th>
                     <th>Prix</th>
                 </tr>
-            {% for glace in glaces %}
+            {% for object in object_list %}
                 <tr>
-                    <th>{{glace.cat}}</th>
-                    <th>{{glace.libelle}}</th>
-                    <th>{{glace.calories}}</th>
-                    <th>{{glace.prixVente}}</th>
+                    <th>{{object.cat}}</th>
+                    <th>{{object.libelle}}</th>
+                    <th>{{object.calories}}</th>
+                    <th>{{object.prixVente}}</th>
                 </tr>
             {% endfor %}
             </table>

@@ -7,24 +7,31 @@ from django.views.generic import ListView
 
 
 def accueil(request):
-    return render(request, 'accueil.html')
+    return render(request, 'congelateur/accueil.html', locals())
+
 def about(request):
-    return render(request, 'about.html')
+    return render(request, 'congelateur/about.html')
 
+def discover(request):
+    return render(request, 'congelateur/discover.html', locals())
 
-def congelateur(request):
-    return render(request, 'congelateur.html')
+def dashboard(request):
+    return render(request, 'congelateur/dashboard.html', locals())
 
 def home(request):
-    return render(request, 'home.html')
-
-def produits(request):
-    listeGlaces = Glace.objects.all()
-    #return render(request, 'products.html')
-    return render(request, 'products.html', {'glaces': listeGlaces})
-
-def congelateur(request):
-    listeCongos = Congelateur.objects.all()
-    return render(request, 'congelateur.html', {'congos':listeCongos})
+    return render(request, 'congelateur/home.html')
 
 
+class CongelateurListView(ListView):
+    queryset = Congelateur.objects.select_related()
+
+    def get_context_data(self, **kwargs):
+        context = super(CongelateurListView, self).get_context_data(**kwargs)
+        return context
+
+class GlaceListView(ListView):
+    queryset = Glace.objects.select_related()
+
+    def get_context_data(self, **kwargs):
+        context = super(GlaceListView, self).get_context_data(**kwargs)
+        return context

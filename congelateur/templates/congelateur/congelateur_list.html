@@ -1,4 +1,4 @@
-{% extends "base.html" %}
+{% extends "congelateur/base.html" %}
 {% load staticfiles %}
 {% block title %}Products{% endblock %}
 {% block stylesheets %}
@@ -15,11 +15,11 @@
                     <th>Libellé</th>
                     <th>Emplacement</th>
                 </tr>
-            {% for congo in congos %}
+            {% for object in object_list %}
                 <tr>
-                    <th>{{congo.code}}</th>
-                    <th>{{congo.libelle}}</th>
-                    <th>{{congo.emplacement}}</th>
+                    <th>{{object.code}}</th>
+                    <th>{{object.libelle}}</th>
+                    <th>{{object.emplacement}}</th>
                 </tr>
             {% endfor %}
             </table>
