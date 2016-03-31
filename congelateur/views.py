@@ -1,5 +1,5 @@
 from django.shortcuts import render
-from congelateur.models import Glace
+from congelateur.models import Glace, Congelateur
 
 from django.views.generic import ListView
 
@@ -22,5 +22,9 @@ def produits(request):
     listeGlaces = Glace.objects.all()
     #return render(request, 'products.html')
     return render(request, 'products.html', {'glaces': listeGlaces})
+
+def congelateur(request):
+    listeCongos = Congelateur.objects.all()
+    return render(request, 'congelateur.html', {'congos':listeCongos})
 
 
