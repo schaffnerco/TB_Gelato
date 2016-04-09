@@ -23,7 +23,7 @@
                     <th>{{object.libelle}}</th>
                     <th>{{object.calories}}</th>
                     <th>{{object.prixVente}}</th>
-                    <th><img src="{{object.image.url}}"></th>
+                    <th><img src="{{ object.image.url }}" /></th>
                     {{object.image.url}}
                 </tr>
             {% endfor %}
