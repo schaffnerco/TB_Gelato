@@ -7,6 +7,7 @@ class Congelateur(models.Model):
     libelle = models.CharField(max_length=100, verbose_name="Libellé")
     emplacement = models.CharField(max_length=50, verbose_name="Emplacement du congélateur")
 
+
     def __str__(self):
         return self.code
 
@@ -14,7 +15,7 @@ class Congelateur(models.Model):
 class Tiroir (models.Model):
     id = models.AutoField(primary_key=True)
     code = models.CharField(max_length=15, unique=True, verbose_name="Code")
-    congelateur = models.ForeignKey(Congelateur, on_delete = models.CASCADE, verbose_name="Congélateur")
+    congelateur = models.ForeignKey(Congelateur, on_delete = models.CASCADE, related_name="tiroirs" , verbose_name="Congélateur")
 
     def liste(self):
         return Tiroir.objects.all()

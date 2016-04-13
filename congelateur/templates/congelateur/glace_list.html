@@ -8,14 +8,14 @@
     {{ block.super }}
     <div class="row">
         <div class="col-lg-10">
-            <h2>Products list</h2>
+            <h2>Liste des produits</h2>
             <table class="table table-hover">
                 <tr>
                     <th>Catégorie</th>
                     <th>Libellé</th>
                     <th>Calories</th>
                     <th>Prix</th>
-                    <th></th>
+                    <th>Image</th>
                 </tr>
             {% for object in object_list %}
                 <tr>
@@ -23,8 +23,7 @@
                     <th>{{object.libelle}}</th>
                     <th>{{object.calories}}</th>
                     <th>{{object.prixVente}}</th>
-                    <th><img src="{{ object.image.url }}" /></th>
-                    {{object.image.url}}
+                    <th><img height="42" width="42" src="{{ object.image.url }}" /></th>
                 </tr>
             {% endfor %}
             </table>
@@ -32,17 +31,11 @@
         <div class="col-lg-2">
             <h3>Sort</h3>
 
-            <h4>Brand</h4>
-            <ul class="logo-list">
-                {% for brand in brands %}
-                    <li><a href="{% url 'products_by_brand' brand.id %}"><img src="{{ brand.logo.url }}" alt="{{ brand.name }}" title="{{ brand.name }}" /></a></li>
-                {% endfor %}
-            </ul>
 
             <h4>Category</h4>
             <ul class="logo-list">
-                {% for category in categories %}
-                    <li><a href="{% url 'products_by_category' category.id %}"><img src="{{ category.picture.url }}" alt="{{ category.name }}" title="{{ category.name }}" /></a></li>
+                {% for ca in cats %}
+                    <li>{{ca.libelle}}</li>
                 {% endfor %}
             </ul>
         </div>

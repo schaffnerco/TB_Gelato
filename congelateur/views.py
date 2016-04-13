@@ -1,8 +1,6 @@
-from django.shortcuts import render
-from congelateur.models import Glace, Congelateur, Tiroir
-from django.db.models import Sum
-from django.db import connection
-from django.views.generic import ListView, DetailView
+from django.shortcuts import render, render_to_response
+from congelateur.models import Glace, Congelateur, Categorie
+from django.views.generic import TemplateView, ListView, DetailView
 
 # Create your views here.
 
@@ -23,6 +21,17 @@ def home(request):
     return render(request, 'congelateur/home.html')
 
 
+
+class GlaceView(TemplateView):
+    template_name = 'congelateur/glace_list.html'
+
+    def get_context_data(self, **kwargs):
+        context = super(GlaceView, self).get_context_data(**kwargs)
+        context['object_list'] = Glace.objects.all()
+        context['cats'] = Categorie.objects.all()
+        return context
+
+
 class CongelateurListView(ListView):
     queryset = Congelateur.objects.select_related()
 
@@ -36,10 +45,4 @@ class CongelateurDetailView(DetailView):
         context = super(CongelateurDetailView, self).get_context_data(**kwargs)
         return context
 
-class GlaceListView(ListView):
-    queryset = Glace.objects.select_related()
-
-    def get_context_data(self, **kwargs):
-        context = super(GlaceListView, self).get_context_data(**kwargs)
-        return context
 
