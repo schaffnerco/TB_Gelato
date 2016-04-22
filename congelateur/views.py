@@ -1,4 +1,4 @@
-from django.shortcuts import render, render_to_response
+from django.shortcuts import render, render_to_response, get_object_or_404
 from congelateur.models import Glace, Congelateur, Categorie
 from django.views.generic import TemplateView, ListView, DetailView
 
@@ -27,9 +27,14 @@ class GlaceView(TemplateView):
 
     def get_context_data(self, **kwargs):
         context = super(GlaceView, self).get_context_data(**kwargs)
-        context['object_list'] = Glace.objects.all()
+        context['glaces'] = Glace.objects.all()
         context['cats'] = Categorie.objects.all()
         return context
+
+
+def lire(request, id):
+    categorie = get_object_or_404(Categorie, id=id)
+    return render(request, 'congelateur/glace_categorie.html', {'cat' : categorie})
 
 
 class CongelateurListView(ListView):

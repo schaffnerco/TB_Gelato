@@ -3,7 +3,6 @@ from django.db import models
 class Congelateur(models.Model):
     id = models.AutoField(primary_key=True)
     code = models.CharField(max_length=15, unique=True, verbose_name="Code")
-    #nombreDeBac = congelateur.IntegerField(blank=True, verbose_name="Nombre de bacs")
     libelle = models.CharField(max_length=100, verbose_name="Libellé")
     emplacement = models.CharField(max_length=50, verbose_name="Emplacement du congélateur")
 
@@ -47,10 +46,11 @@ class Glace (models.Model):
         )
         fournisseur = models.CharField(max_length=50, choices=listeFournisseurs, default=ADMIN, verbose_name="Fournisseur")
         bac = models.ForeignKey(Bac, verbose_name="Bac ou trouver la glace")
-        cat = models.ForeignKey('Categorie', verbose_name="Catégorie de la glace")
+        cat = models.ForeignKey('Categorie', related_name="glaces", verbose_name="Catégorie de la glace")
 
         def __str__(self):
             return self.libelle
+
 
 class Categorie (models.Model):
     id = models.AutoField(primary_key=True)
@@ -58,6 +58,8 @@ class Categorie (models.Model):
     libelle = models.CharField(max_length=100, verbose_name="Libellé")
     image = models.ImageField(upload_to="categories", verbose_name="Image", blank=True, null=True)
     sousCategorie = models.ForeignKey('self', blank=True, null=True, on_delete=models.CASCADE, verbose_name="Catégorie")
+    glaces = Glace.objects.all()
 
     def __str__(self):
         return self.libelle
+

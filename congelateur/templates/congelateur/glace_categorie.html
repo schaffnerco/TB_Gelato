@@ -8,7 +8,8 @@
     {{ block.super }}
     <div class="row">
         <div class="col-lg-10">
-            <h2>Liste des produits</h2>
+            <h2>{{cat.libelle}}</h2>
+            {{cat.glaces}}
             <table class="table table-hover">
                 <tr>
                     <th>Catégorie</th>
@@ -35,9 +36,7 @@
             <h4>Catégorie</h4>
             <ul class="logo-list">
                 {% for ca in cats %}
-                    <li>
-                        <a href="{% url 'listeCat' ca.id %}">{{ca.libelle}}</a>
-                    </li>
+                    <li><a href="">{{ca.libelle}}</a></li>
                 {% endfor %}
             </ul>
         </div>
