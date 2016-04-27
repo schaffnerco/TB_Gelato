@@ -9,7 +9,6 @@
     <div class="row">
         <div class="col-lg-10">
             <h2>{{cat.libelle}}</h2>
-            {{cat.glaces}}
             <table class="table table-hover">
                 <tr>
                     <th>Catégorie</th>
@@ -18,7 +17,8 @@
                     <th>Prix</th>
                     <th>Image</th>
                 </tr>
-            {% for g in glaces %}
+                {{gl.libelle}}
+            {% for g in gl %}
                 <tr>
                     <th>{{g.cat}}</th>
                     <th>{{g.libelle}}</th>

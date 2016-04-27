@@ -48,6 +48,7 @@ class Glace (models.Model):
         bac = models.ForeignKey(Bac, verbose_name="Bac ou trouver la glace")
         cat = models.ForeignKey('Categorie', related_name="glaces", verbose_name="Catégorie de la glace")
 
+
         def __str__(self):
             return self.libelle
 
@@ -58,8 +59,9 @@ class Categorie (models.Model):
     libelle = models.CharField(max_length=100, verbose_name="Libellé")
     image = models.ImageField(upload_to="categories", verbose_name="Image", blank=True, null=True)
     sousCategorie = models.ForeignKey('self', blank=True, null=True, on_delete=models.CASCADE, verbose_name="Catégorie")
-    glaces = Glace.objects.all()
 
     def __str__(self):
         return self.libelle
+
+
 
