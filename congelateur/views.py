@@ -35,14 +35,22 @@ class GlaceView(TemplateView):
 def lire(request, p_id):
     categorie = get_object_or_404(Categorie, id=p_id)
     glaces = []
+
     if categorie.sousCategorie is None:
-        cats = Categorie.objects.filter(sousCategorie=categorie.id)
-        for c in cats :
-            glaces.append(Glace.objects.filter(cat=c.id))
+
+        lesCat = Categorie.objects.filter(sousCategorie=categorie.id)
+
+        for p in lesCat:
+            pk = p.id
+            uneCat = Glace.objects.filter(cat=pk)
+            for u in uneCat:
+                glaces.append(u)
     else:
         glaces = Glace.objects.filter(cat=p_id)
 
-    return render(request, 'congelateur/glace_categorie.html', {'cat': categorie, 'gl': glaces})
+    toutesLesCats = Categorie.objects.all()
+
+    return render(request, 'congelateur/glace_categorie.html', {'cat': categorie, 'gl': glaces, 'cats':toutesLesCats})
 
 
 class CongelateurListView(ListView):

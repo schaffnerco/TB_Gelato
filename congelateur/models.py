@@ -58,7 +58,7 @@ class Categorie (models.Model):
     code = models.CharField(max_length=5, unique=True, verbose_name="Code")
     libelle = models.CharField(max_length=100, verbose_name="Libellé")
     image = models.ImageField(upload_to="categories", verbose_name="Image", blank=True, null=True)
-    sousCategorie = models.ForeignKey('self', blank=True, null=True, on_delete=models.CASCADE, verbose_name="Catégorie")
+    sousCategorie = models.ForeignKey('self', blank=True, null=True, related_name="categories", on_delete=models.CASCADE, verbose_name="Catégorie")
 
     def __str__(self):
         return self.libelle

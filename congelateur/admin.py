@@ -1,3 +1,4 @@
+from django import forms
 from django.contrib import admin
 
 from congelateur.models import *
@@ -5,7 +6,6 @@ from congelateur.models import *
 
 class CongelateurAdmin(admin.ModelAdmin):
     list_display = ('code', 'libelle', 'emplacement')
-
 
 
 admin.site.register(Congelateur, CongelateurAdmin)
